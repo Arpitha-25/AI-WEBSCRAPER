@@ -9,6 +9,8 @@ def scrape_website(website):
 
     chrome_driver_path="./chromedriver.exe" 
     options=webdriver.ChromeOptions()
+    options.add_argument("--disable-gpu")  
+
     driver=webdriver.Chrome(service=Service(chrome_driver_path), options=options)
 
     try:
@@ -19,7 +21,7 @@ def scrape_website(website):
 
         return html
     finally:
-        driver.close()
+        driver.quit()
 
 def extract_body_content(html_content):
     soup=BeautifulSoup(html_content,"html.parser")
